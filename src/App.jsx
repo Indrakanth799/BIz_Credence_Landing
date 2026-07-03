@@ -22,7 +22,7 @@ export default function App() {
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100dvh",
         width: "100%",
         background: "#0D0D0D",
         color: "#ffffff",
@@ -49,6 +49,55 @@ export default function App() {
         .engine-chip:hover { border-color:#dc2626!important; transform:translateY(-2px); background:rgba(220,38,38,.1)!important; color:#dc2626!important; }
         .email-link { transition:color .25s,letter-spacing .25s; }
         .email-link:hover { color:#dc2626!important; letter-spacing:.8px; }
+
+        .bc-content {
+          padding: clamp(20px, 6vw, 32px) clamp(20px, 6vw, 32px);
+        }
+        .bc-eyebrow {
+          font-size: clamp(9px, 2.2vw, 11px);
+          letter-spacing: clamp(1px, 0.4vw, 2px);
+        }
+        .bc-headline {
+          font-size: clamp(26px, 6vw, 42px);
+        }
+        .bc-subtext {
+          font-size: clamp(13px, 2.4vw, 15px);
+        }
+        .bc-pillars {
+          gap: clamp(6px, 1.5vw, 8px);
+        }
+        .bc-pillar-chip {
+          font-size: clamp(10.5px, 2.2vw, 12px);
+          padding: clamp(5px, 1.5vw, 7px) clamp(10px, 3vw, 16px);
+        }
+        .bc-arch-card {
+          padding: clamp(16px, 4vw, 20px) clamp(16px, 5vw, 28px);
+        }
+        .bc-arch-title {
+          font-size: clamp(15px, 3vw, 17px);
+        }
+        .bc-engine-chip {
+          font-size: clamp(10.5px, 2.2vw, 12px);
+          padding: clamp(6px, 2vw, 8px) clamp(10px, 3vw, 16px);
+        }
+        .bc-status-row {
+          gap: clamp(10px, 3vw, 20px);
+        }
+        .bc-status-label {
+          font-size: clamp(11px, 2.2vw, 13px);
+        }
+        .bc-email {
+          font-size: clamp(11px, 2.2vw, 13px);
+        }
+        .bc-logo {
+          width: clamp(120px, 30vw, 200px);
+        }
+
+        @media (max-width: 480px) {
+          .bc-status-row { flex-direction: column; gap: 10px; }
+          .bc-status-row > span:nth-of-type(1) { display: none; }
+        }
+
         @media (prefers-reduced-motion:reduce) { .reveal,.logo-float,.arch-card,video { animation:none!important; opacity:1!important; } }
       `}</style>
 
@@ -71,9 +120,7 @@ export default function App() {
         }}
       >
         <source
-          // src="https://res.cloudinary.com/dpkzmquhc/video/upload/v1782911574/0_Digital_Code_3840x2160_tkprtz.mp4"
           src="https://res.cloudinary.com/dpkzmquhc/video/upload/v1782912757/0_Digital_Art_Futuristic_3840x2160_gymlhy.mp4"
-          // src="https://res.cloudinary.com/dpkzmquhc/video/upload/v1782912738/15254965_1920_1080_24fps_kkztac.mp4"
           type="video/mp4"
         />
       </video>
@@ -96,8 +143,8 @@ export default function App() {
           top: "-15%",
           left: "50%",
           transform: "translateX(-50%)",
-          width: "800px",
-          height: "800px",
+          width: "min(800px, 140vw)",
+          height: "min(800px, 140vw)",
           background: "radial-gradient(circle, rgba(220,38,38,0.12) 0%, transparent 65%)",
           filter: "blur(40px)",
           animation: "glowPulse 6s ease-in-out infinite",
@@ -120,6 +167,7 @@ export default function App() {
 
       {/* CONTENT */}
       <div
+        className="bc-content"
         style={{
           position: "relative",
           zIndex: 10,
@@ -129,29 +177,28 @@ export default function App() {
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
-          padding: "0 32px",
           maxWidth: "900px",
           margin: "0 auto",
           width: "100%",
           gap: "0",
+          boxSizing: "border-box",
         }}
       >
         {/* Logo */}
         <div className="logo-float reveal" style={{ animationDelay: "0.05s", marginBottom: "10px" }}>
-          <img src={logo} alt="Biz Credence" style={{ width: "200px", objectFit: "contain" }} />
+          <img src={logo} alt="Biz Credence" className="bc-logo" style={{ objectFit: "contain", maxWidth: "100%" }} />
         </div>
 
         {/* Eyebrow */}
         <p
-          className="reveal"
+          className="reveal bc-eyebrow"
           style={{
             animationDelay: "0.14s",
             color: "#dc2626",
-            fontSize: "11px",
             fontWeight: 700,
-            letterSpacing: "2px",
             textTransform: "uppercase",
             marginBottom: "10px",
+            maxWidth: "100%",
           }}
         >
           Strategy for Tomorrow · Intelligence for Today · Engineering for What's Next
@@ -159,15 +206,15 @@ export default function App() {
 
         {/* Headline */}
         <h1
-          className="reveal"
+          className="reveal bc-headline"
           style={{
             animationDelay: "0.23s",
-            fontSize: "42px",
             fontWeight: 800,
             lineHeight: 1.15,
             letterSpacing: "-0.5px",
             marginBottom: "10px",
             textShadow: "0 0 40px rgba(255,255,255,0.08)",
+            maxWidth: "100%",
           }}
         >
           Helping Enterprises Navigate Complexity, At Scale.
@@ -175,11 +222,10 @@ export default function App() {
 
         {/* Subtext */}
         <p
-          className="reveal"
+          className="reveal bc-subtext"
           style={{
             animationDelay: "0.32s",
             color: "#bbbbbb",
-            fontSize: "15px",
             lineHeight: 1.7,
             maxWidth: "600px",
             marginBottom: "14px",
@@ -204,13 +250,12 @@ export default function App() {
 
         {/* Pillars */}
         <div
-          className="reveal"
+          className="reveal bc-pillars"
           style={{
             animationDelay: "0.44s",
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: "8px",
             marginBottom: "16px",
             maxWidth: "680px",
           }}
@@ -218,16 +263,15 @@ export default function App() {
           {pillars.map((p, i) => (
             <span
               key={i}
-              className="pillar-chip"
+              className="pillar-chip bc-pillar-chip"
               style={{
                 border: "1px solid #2A2A2A",
                 color: "#cccccc",
-                fontSize: "12px",
                 fontWeight: 500,
-                padding: "7px 16px",
                 borderRadius: "999px",
                 background: "rgba(13, 13, 13, 0.4)",
                 backdropFilter: "blur(4px)",
+                whiteSpace: "nowrap",
               }}
             >
               {p}
@@ -237,46 +281,44 @@ export default function App() {
 
         {/* Architecture card */}
         <div
-          className="arch-card reveal"
+          className="arch-card reveal bc-arch-card"
           style={{
             animationDelay: "0.52s",
             width: "100%",
             background: "rgba(17,17,17,0.85)",
             border: "1px solid #1E1E1E",
             borderRadius: "16px",
-            padding: "20px 28px",
             marginBottom: "16px",
             backdropFilter: "blur(12px)",
+            boxSizing: "border-box",
           }}
         >
           <p
+            className="bc-eyebrow"
             style={{
               color: "#dc2626",
-              fontSize: "11px",
               fontWeight: 700,
-              letterSpacing: "2px",
               textTransform: "uppercase",
               marginBottom: "6px",
             }}
           >
             Powered By
           </p>
-          <h2 style={{ fontSize: "17px", fontWeight: 700, marginBottom: "14px", color: "#ffffff" }}>
+          <h2 className="bc-arch-title" style={{ fontWeight: 700, marginBottom: "14px", color: "#ffffff" }}>
             Biz Credence Enterprise Intelligence Architecture
           </h2>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px" }}>
             {engines.map((e, i) => (
               <span
                 key={i}
-                className="engine-chip"
+                className="engine-chip bc-engine-chip"
                 style={{
                   border: "1px solid #2A2A2A",
                   color: "#eeeeee",
-                  fontSize: "12px",
                   fontWeight: 600,
-                  padding: "8px 16px",
                   borderRadius: "10px",
                   background: "#0D0D0D",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {e}
@@ -287,14 +329,13 @@ export default function App() {
 
         {/* Coming soon + email row */}
         <div
-          className="reveal"
+          className="reveal bc-status-row"
           style={{
             animationDelay: "0.6s",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexWrap: "wrap",
-            gap: "20px",
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "9px" }}>
@@ -309,16 +350,16 @@ export default function App() {
                 flexShrink: 0,
               }}
             />
-            <span style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#ffffff" }}>
+            <span className="bc-status-label" style={{ fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#ffffff" }}>
               Biz Credence 3.0
             </span>
-            <span style={{ fontSize: "13px", color: "#666666" }}>— Coming Soon</span>
+            <span className="bc-status-label" style={{ color: "#666666" }}>— Coming Soon</span>
           </div>
           <span style={{ color: "#333", fontSize: "13px" }}>·</span>
           <a
             href="mailto:connect@bizcredence.com"
-            className="email-link"
-            style={{ color: "#999999", fontSize: "13px", textDecoration: "none", fontWeight: 500 }}
+            className="email-link bc-email"
+            style={{ color: "#999999", textDecoration: "none", fontWeight: 500 }}
           >
             connect@bizcredence.com
           </a>
@@ -333,7 +374,7 @@ export default function App() {
           position: "relative",
           zIndex: 10,
           textAlign: "center",
-          padding: "10px",
+          padding: "10px clamp(12px, 4vw, 10px)",
           borderTop: "1px solid #1A1A1A",
           color: "#ffffff",
           fontSize: "11px",
